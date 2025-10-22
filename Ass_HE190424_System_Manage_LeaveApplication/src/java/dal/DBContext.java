@@ -15,7 +15,7 @@ public class DBContext {
             + "encrypt=true;trustServerCertificate=true;";
     
     private final String user = "magi";
-    private final String pass = "123";
+    private final String pass = "magi";
     
     public Connection getConnection() throws Exception {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
