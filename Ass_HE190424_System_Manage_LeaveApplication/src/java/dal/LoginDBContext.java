@@ -1,12 +1,13 @@
 package dal;
 
+import jakarta.servlet.annotation.WebServlet;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import model.User;
 
 public class LoginDBContext extends DBContext {
 
-    public User getUserByLogin(String username, String password) {
+    public User getUser(String username, String password) {
         try {
             String sql = "SELECT * FROM Users WHERE Username = ? AND PasswordHash = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
