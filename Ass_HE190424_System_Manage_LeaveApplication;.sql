@@ -93,3 +93,5 @@ VALUES (1, 3), -- Admin
 -- Requests
 INSERT INTO Requests (CreatedByUserID, FromDate, ToDate, Reason, Status)
 VALUES (2, '2025-10-25', '2025-10-27', N'Nghỉ phép du lịch', 'Inprogress');
+INSERT INTO Requests (CreatedByUserID, FromDate, ToDate, Reason, Status)
+VALUES (2, '2025-11-02', '2025-11-05', N'Đi du học', 'Inprogress');

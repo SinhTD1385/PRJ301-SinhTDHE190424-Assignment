@@ -2,36 +2,26 @@ package dal;
 
 import java.sql.*;
 import model.Request;
-import model.User;
 
 public class ViewDBContext extends DBContext {
 
-    public ViewDBContext() {
-        super(); // 🔹 gọi DBContext() để mở kết nối
-    }
-
-    public Request getRequestById(int requestId) {
+    public Request getRequestById(int id) {
         Request r = null;
         try {
             String sql = """
                 SELECT r.RequestID, r.FromDate, r.ToDate, r.Reason, r.Status,
                        r.ProcessingReason, r.ProcessingDate,
-                       c.UserID AS CreatedByID, c.Username AS CreatedBy,
-                       p.UserID AS ProcessedByID, p.Username AS ProcessedBy
+                       e.FullName, e.Email, e.Phone, d.Name AS DivisionName
                 FROM Requests r
-                     INNER JOIN Users c ON r.CreatedByUserID = c.UserID
-                     LEFT JOIN Users p ON r.ProcessedByUserID = p.UserID
+                JOIN Users u ON r.CreatedByUserID = u.UserID
+                JOIN Employees e ON u.EmployeeID = e.EmployeeID
+                JOIN Divisions d ON e.DivisionID = d.DivisionID
                 WHERE r.RequestID = ?
-                """;
+            """;
 
-            if (connection == null || connection.isClosed()) {
-                System.out.println("⚠️ Connection is NULL or closed. Reconnecting...");
-                connection = getConnection(); // ✅ mở lại kết nối
-            }
-
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, requestId);
-            ResultSet rs = stm.executeQuery();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 r = new Request();
@@ -41,24 +31,13 @@ public class ViewDBContext extends DBContext {
                 r.setReason(rs.getString("Reason"));
                 r.setStatus(rs.getString("Status"));
                 r.setProcessingReason(rs.getString("ProcessingReason"));
+                r.setEmployeeName(rs.getString("FullName"));
+                r.setEmail(rs.getString("Email"));
+                r.setPhone(rs.getString("Phone"));
+                r.setDivisionName(rs.getString("DivisionName"));
                 r.setProcessingDate(rs.getTimestamp("ProcessingDate"));
-
-                User createdBy = new User();
-                createdBy.setUserID(rs.getInt("CreatedByID"));
-                createdBy.setUsername(rs.getString("CreatedBy"));
-                r.setCreatedBy(createdBy);
-
-                if (rs.getString("ProcessedBy") != null) {
-                    User processedBy = new User();
-                    processedBy.setUserID(rs.getInt("ProcessedByID"));
-                    processedBy.setUsername(rs.getString("ProcessedBy"));
-                    r.setProcessedBy(processedBy);
-                }
             }
-
-            rs.close();
-            stm.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return r;

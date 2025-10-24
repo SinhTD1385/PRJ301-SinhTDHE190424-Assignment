@@ -61,7 +61,7 @@
         <% if (user != null) { %>
             <p>Bạn có thể chọn chức năng:</p>
             <a href="list" class="btn">Xem đơn nghỉ phép</a>
-            <a href="apply" class="btn">Gửi đơn nghỉ phép</a>
+            <a href="create" class="btn">Gửi đơn nghỉ phép</a>
         <% } else { %>
             <p>Vui lòng đăng nhập để sử dụng hệ thống.</p>
         <% } %>

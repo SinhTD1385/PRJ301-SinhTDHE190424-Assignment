@@ -14,6 +14,11 @@ public class Request {
 
     private User createdBy;
     private User processedBy;
+    
+    private String employeeName;
+    private String email;
+    private String phone;
+    private String divisionName;
 
     // getters & setters
     public int getRequestID() { return requestID; }
@@ -42,4 +47,16 @@ public class Request {
 
     public User getProcessedBy() { return processedBy; }
     public void setProcessedBy(User processedBy) { this.processedBy = processedBy; }
+    
+    public String getEmployeeName() { return employeeName; }
+    public void setEmployeeName(String employeeName) { this.employeeName = employeeName; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+
+    public String getDivisionName() { return divisionName; }
+    public void setDivisionName(String divisionName) { this.divisionName = divisionName; }
 }
