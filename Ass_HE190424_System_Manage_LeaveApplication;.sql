@@ -1,5 +1,5 @@
-﻿
-USE Ass_HE190424_System_Manage_LeaveApplication;
+﻿CREATE DATABASE Ass_System_Manage_LeaveApplication;
+USE Ass_System_Manage_LeaveApplication;
 GO
 
 -- 1. Divisions

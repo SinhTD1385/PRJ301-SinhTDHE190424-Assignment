@@ -1,24 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dal;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-/**
- *
- * @author Admin
- */
+import java.sql.SQLException;
+
 public class DBContext {
-    private final String url = "jdbc:sqlserver://MAGIIIIt:1433;"
-            + "databaseName=Ass_HE190424_System_Manage_LeaveApplication;"
+    protected Connection connection;
+
+    String url = "jdbc:sqlserver://MAGIIII:1433;"
+            + "databaseName=Ass_System_Manage_LeaveApplication;"
             + "encrypt=true;trustServerCertificate=true;";
-    
-    private final String user = "magi";
-    private final String pass = "magi";
-    
-    public Connection getConnection() throws Exception {
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        return DriverManager.getConnection(url, user, pass);
+    String user = "magi";
+    String pass = "magi";
+
+    public DBContext() {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            connection = DriverManager.getConnection(url, user, pass);
+            System.out.println("Connected to SQL Server!");
+        } catch (Exception e) {
+            System.out.println("Failed to connect to SQL Server!");
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getConnection() throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            connection = DriverManager.getConnection(url, user, pass);
+        }
+        return connection;
     }
 }
