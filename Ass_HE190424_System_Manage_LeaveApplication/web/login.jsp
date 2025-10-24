@@ -23,8 +23,8 @@
     <h2>Đăng nhập hệ thống</h2>
     <form action="login" method="post">
         <input type="hidden" name="next" value="<%= request.getParameter("next") %>">
-        <input type="text" name="username" placeholder="Tên đăng nhập" required>
-        <input type="password" name="password" placeholder="Mật khẩu" required>
+        <input type="text" id="txt_username" name="username" placeholder="Tên đăng nhập" required>
+        <input type="password" id="txt_password" name="password" placeholder="Mật khẩu" required>
         <button type="submit">Đăng nhập</button>
     </form>
     <div class="error">

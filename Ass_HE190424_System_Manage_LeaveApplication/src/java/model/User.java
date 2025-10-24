@@ -30,4 +30,6 @@ public class User {
     public void setEmployeeID(int employeeID) {
         this.employeeID = employeeID;
     }
+    
+    public int getId() { return this.userID; }
 }

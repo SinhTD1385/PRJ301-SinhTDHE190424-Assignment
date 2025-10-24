@@ -60,8 +60,8 @@
         <h2>Chào mừng đến với hệ thống quản lý nghỉ phép</h2>
         <% if (user != null) { %>
             <p>Bạn có thể chọn chức năng:</p>
-            <a href="leaveList" class="btn">Xem đơn nghỉ phép</a>
-            <a href="applyLeave" class="btn">Gửi đơn nghỉ phép</a>
+            <a href="list" class="btn">Xem đơn nghỉ phép</a>
+            <a href="apply" class="btn">Gửi đơn nghỉ phép</a>
         <% } else { %>
             <p>Vui lòng đăng nhập để sử dụng hệ thống.</p>
         <% } %>
